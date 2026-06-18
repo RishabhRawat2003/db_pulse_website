@@ -4,8 +4,6 @@ import SupportedDB from "@/components/homepageComponents/SupportedDB";
 import HowItWorks from "@/components/homepageComponents/HowItWorks";
 import AgentIntegration from "@/components/homepageComponents/AgentIntegration";
 import DownloadSection from "@/components/homepageComponents/DownloadSection";
-import CtaSection from "@/components/homepageComponents/CtaSection";
-
 
 
 export default function LandingPage() {
@@ -31,8 +29,6 @@ export default function LandingPage() {
         {/* Desktop Download Section */}
         <DownloadSection />
 
-        {/* Final CTA + Feature highlights */}
-        <CtaSection />
       </main>
     </div>
   );
