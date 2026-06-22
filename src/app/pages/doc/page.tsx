@@ -213,7 +213,6 @@ export default function DocsPage() {
 DBPulseAgent.init({
   apiKey: "your-api-key",
   connectionId: "your-connection-id",
-  envType: "prod",     // "dev" | "prod" | "staging" | "test" | "local"
   debug: false,
 });
 
@@ -223,14 +222,7 @@ app.use(DBPulseAgent.trackRequests());`}
                 </pre>
               </div>
 
-              <h4 className="text-base md:text-lg font-semibold mt-6 text-gray-800">Environment types</h4>
-              <ul className="list-disc list-inside space-y-1 text-gray-700">
-                <li><code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">dev</code> – development, logs are verbose</li>
-                <li><code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">prod</code> – production, minimal overhead</li>
-                <li><code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">staging</code> – staging environment</li>
-                <li><code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">test</code> – test suite</li>
-                <li><code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">local</code> – local development with extended debug</li>
-              </ul>
+
               <p className="mt-4 text-sm text-gray-500">
                 <strong>Note:</strong> The agent automatically detects your MongoDB driver and only tracks queries when a connection is active.
               </p>

@@ -12,7 +12,6 @@ function AgentIntegration() {
 DBPulseAgent.init({
   apiKey: "your-api-key",
   connectionId: "your-connection-id",
-  envType: "prod",     // "dev" | "prod" | "staging" | "test" | "local"
   debug: false,
 });
     
@@ -52,7 +51,7 @@ app.use(DBPulseAgent.trackRequests());`;
               </li>
               <li className="flex gap-2">
                 <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                Supports dev/prod/staging environment tagging
+                Simple setup with minimal configuration
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-3">
@@ -80,7 +79,6 @@ app.use(DBPulseAgent.trackRequests());`;
 DBPulseAgent.init({
   apiKey: "•••••••••••••",
   connectionId: "conn_abc123",
-  envType: "prod",
   debug: false,  true | false
 });
 
