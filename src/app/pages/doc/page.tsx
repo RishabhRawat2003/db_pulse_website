@@ -251,6 +251,9 @@ app.use(DBPulseAgent.trackRequests());`}
                     <span className="text-zinc-600 w-28 text-right shrink-0 truncate">192.168.1.1</span>
                   </div>
                   <div className="mt-3 border-t border-zinc-700/50 pt-3 space-y-1">
+                    <div className="text-purple-400 text-xs">
+                      ⚡ Method: <span className="font-mono">GET</span>
+                    </div>
                     <div className="text-emerald-400 text-[11px]">📁 Collection: <span className="font-mono">users</span></div>
                     <div className="text-blue-400 text-[11px]">📍 Route: <span className="font-mono">/api/users</span></div>
                     <pre className="bg-zinc-900 border border-zinc-700 rounded p-2 text-[11px] text-zinc-300 overflow-x-auto whitespace-pre-wrap break-all">
