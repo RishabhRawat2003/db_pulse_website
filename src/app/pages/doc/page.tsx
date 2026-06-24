@@ -1,9 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Activity, X } from 'lucide-react'   // make sure lucide-react is installed
+import { Activity, X } from 'lucide-react'
 
-// ─── Sidebar navigation items ───
 const navItems = [
   { id: 'overview', label: 'Overview' },
   { id: 'mongodb', label: 'MongoDB' },
@@ -15,27 +14,19 @@ export default function DocsPage() {
   const [activeId, setActiveId] = useState('overview')
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  // Intersection Observer to highlight active section
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
-          }
+          if (entry.isIntersecting) setActiveId(entry.target.id)
         })
       },
       { rootMargin: '-20% 0px -60% 0px' }
     )
-
-    document.querySelectorAll('section[id]').forEach((section) => {
-      observer.observe(section)
-    })
-
+    document.querySelectorAll('section[id]').forEach((s) => observer.observe(s))
     return () => observer.disconnect()
   }, [])
 
-  // Close sidebar on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setSidebarOpen(false)
@@ -46,45 +37,25 @@ export default function DocsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
-      {/* Mobile header – visible only on small screens */}
-      <header className="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 py-3 md:hidden flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-            <Activity className="w-5 h-5 text-white" />
-          </div>
-          <span className="font-bold text-2xl tracking-tight text-dark">DbPulse</span>
-        </div>
-        <button
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-2 rounded-lg hover:bg-gray-100 text-gray-600"
-          aria-label="Toggle navigation"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </header>
 
       <div className="flex max-w-7xl mx-auto pt-6 px-4 md:px-6 lg:px-8">
-        {/* ─── BACKDROP ─── */}
+        {/* Backdrop */}
         {sidebarOpen && (
           <div
-            className="fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity"
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
             onClick={() => setSidebarOpen(false)}
             aria-hidden="true"
           />
         )}
 
-        {/* ─── SIDEBAR ─── */}
         <aside
           className={`
-            fixed inset-y-0 left-0 z-50 w-72  p-6 overflow-y-auto
+            fixed inset-y-0 left-0 z-50 w-72 bg-white p-6 overflow-y-auto
             transform transition-transform duration-300 ease-in-out
             ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-            md:translate-x-0 md:relative md:z-auto md:w-64 md:min-h-screen 
-            lg:w-72 md:sticky md:top-22 md:self-start
+            md:translate-x-0 md:relative md:z-auto md:w-64 md:bg-transparent
+            lg:w-72 md:sticky md:top-22 md:h-fit md:self-start md:overflow-y-visible
           `}
-          style={{ minHeight: '100vh' }}
         >
           <div className="flex items-center justify-between mb-8 md:mb-10">
             <div className="flex items-center gap-2">
@@ -93,7 +64,6 @@ export default function DocsPage() {
               </div>
               <span className="font-bold text-2xl tracking-tight text-dark">DbPulse</span>
             </div>
-            {/* Close button inside sidebar (mobile) */}
             <button
               onClick={() => setSidebarOpen(false)}
               className="md:hidden p-2 rounded-lg hover:bg-gray-100 text-gray-600"
@@ -131,9 +101,16 @@ export default function DocsPage() {
           </div>
         </aside>
 
-        {/* ─── MAIN CONTENT ─── */}
-        <main className="flex-1 px-0 py-10 md:py-12 md:px-8 lg:px-12 max-w-4xl">
+        {/* ─── MAIN CONTENT ───
+          FIX 4: Added `min-w-0` — critical for flex children. Without it, a flex child's
+                  min-width defaults to `auto` (its content's intrinsic width), which lets
+                  wide <pre>/<code> blocks push the element beyond the flex container's bounds.
+                  `min-w-0` overrides this to allow the child to shrink below its content size,
+                  letting overflow-x-auto on inner elements do its job.
+        */}
+        <main className="flex-1 min-w-0 px-0 py-10 md:py-12 md:px-8 lg:px-12">
           <div className="prose prose-gray max-w-none">
+
             {/* Overview */}
             <section id="overview" className="scroll-mt-20">
               <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">Documentation</h1>
@@ -160,7 +137,6 @@ export default function DocsPage() {
                 <span>🍃</span> MongoDB <span className="text-sm font-normal text-green-600">● Active</span>
               </h2>
 
-              {/* Setup */}
               <h3 className="text-xl md:text-2xl font-bold mt-6 text-gray-900">Setup</h3>
               <p className="text-gray-600">
                 Follow these steps to start tracking MongoDB queries in your Node.js application.
@@ -176,38 +152,40 @@ export default function DocsPage() {
                   </a>
                 </li>
                 <li>
-                  <strong>Sign up</strong> and add your MongoDB connection string. You’ll receive an <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">apiKey</code> and <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">connectionId</code>.
+                  <strong>Sign up</strong> and add your MongoDB connection string. You'll receive an{' '}
+                  <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">apiKey</code> and{' '}
+                  <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">connectionId</code>.
                 </li>
                 <li>
                   <strong>Install the agent</strong> in your project:
+                  {/* FIX 5: Added overflow-x-auto to all code blocks so they scroll
+                      horizontally on narrow screens instead of pushing the layout. */}
                   <div className="bg-gray-900 text-gray-200 border border-gray-700 rounded-lg p-3 mt-2 overflow-x-auto">
                     <code className="text-sm font-mono text-green-400 whitespace-nowrap">npm install dbpulse-agent</code>
                   </div>
                 </li>
-                <li>
-                  <strong>Initialize</strong> the agent with your credentials (see the full example below).
-                </li>
-                <li>
-                  <strong>Add middleware</strong> to your Express app (see the full example below).
-                </li>
+                <li><strong>Initialize</strong> the agent with your credentials (see the full example below).</li>
+                <li><strong>Add middleware</strong> to your Express app (see the full example below).</li>
               </ol>
               <p className="mt-4 text-gray-600">
-                That’s it — DbPulse will now capture every MongoDB query with API context and execution time.
+                That's it — DbPulse will now capture every MongoDB query with API context and execution time.
                 Logs are retained for <strong className="text-gray-900">7 days</strong>.
               </p>
 
-              {/* Full Implementation Example */}
               <h3 className="text-xl md:text-2xl font-bold mt-8 text-gray-900">Full Implementation</h3>
               <div className="bg-blue-50 border-l-4 border-primary p-4 rounded-r-lg mb-4">
                 <p className="text-sm text-gray-700">
-                  <span className="font-semibold">Current support:</span> The agent is available for <strong>Node.js</strong> applications using <strong>MongoDB</strong>.
+                  <span className="font-semibold">Current support:</span> The agent is available for{' '}
+                  <strong>Node.js</strong> applications using <strong>MongoDB</strong>.
                 </p>
               </div>
               <p className="text-gray-600">
-                Add the following code to your main server file (e.g., <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">app.js</code> or <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">index.ts</code>):
+                Add the following code to your main server file (e.g.,{' '}
+                <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">app.js</code> or{' '}
+                <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">index.ts</code>):
               </p>
               <div className="mt-4 bg-gray-900 text-gray-200 border border-gray-700 rounded-lg p-4 overflow-x-auto">
-                <pre className="text-sm font-mono text-gray-300 whitespace-pre-wrap">
+                <pre className="text-sm font-mono text-gray-300 whitespace-pre">
                   {`import { DBPulseAgent } from "dbpulse-agent";
 
 DBPulseAgent.init({
@@ -222,12 +200,10 @@ app.use(DBPulseAgent.trackRequests());`}
                 </pre>
               </div>
 
-
               <p className="mt-4 text-sm text-gray-500">
                 <strong>Note:</strong> The agent automatically detects your MongoDB driver and only tracks queries when a connection is active.
               </p>
 
-              {/* Tracking features */}
               <h4 className="text-base md:text-lg font-semibold mt-8 text-gray-800">Tracking features</h4>
               <ul className="list-disc list-inside space-y-1 text-gray-700">
                 <li>Every <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">find</code>, <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">insert</code>, <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">update</code>, <code className="bg-gray-200 px-1.5 py-0.5 rounded text-xs">delete</code> and aggregation</li>
@@ -236,10 +212,12 @@ app.use(DBPulseAgent.trackRequests());`}
                 <li>Filterable logs by database, collection, and time range</li>
               </ul>
 
-              {/* Updated Example Log Entry – matches the actual log display */}
               <h4 className="text-base md:text-lg font-semibold mt-8 text-gray-800">Example log entry</h4>
               <div className="bg-gray-100 border border-gray-200 rounded-lg p-4">
                 <p className="text-sm text-gray-600">As displayed in the desktop app:</p>
+                {/* FIX 6: The log entry mock uses overflow-x-auto on the outer wrapper
+                    and `min-w-max` on the inner row so it scrolls as a unit on mobile
+                    instead of wrapping awkwardly or overflowing. */}
                 <div className="mt-3 bg-[#1a1f24] rounded-lg p-3 font-mono text-xs text-gray-300 overflow-x-auto border border-gray-700">
                   <div className="flex items-center gap-3 text-xs min-w-max">
                     <span className="text-zinc-600 w-44 shrink-0">14:23:45</span>
@@ -281,7 +259,7 @@ app.use(DBPulseAgent.trackRequests());`}
               </p>
               <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <p className="text-sm text-yellow-800 flex items-center gap-2">
-                  <span>🚧</span> We’re working on full integration with pg driver and connection pooling.
+                  <span>🚧</span> We're working on full integration with pg driver and connection pooling.
                 </p>
               </div>
               <ul className="mt-4 list-disc list-inside text-gray-500">
@@ -300,10 +278,11 @@ app.use(DBPulseAgent.trackRequests());`}
               </p>
               <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <p className="text-sm text-yellow-800 flex items-center gap-2">
-                  <span>📋</span> We’ll support both mysql2 and native mysql packages.
+                  <span>📋</span> We'll support both mysql2 and native mysql packages.
                 </p>
               </div>
             </section>
+
           </div>
         </main>
       </div>
