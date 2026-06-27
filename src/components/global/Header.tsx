@@ -32,6 +32,9 @@ function Header() {
             <a href="/#how-it-works" className="text-gray-600 hover:text-primary transition">
               How it works
             </a>
+            <Link href="/pages/doc" className="text-gray-600 hover:text-primary transition">
+              Documentation
+            </Link>
           </div>
 
           {/* Mobile menu toggle */}
@@ -69,6 +72,13 @@ function Header() {
               >
                 How it works
               </a>
+              <Link
+                href="/pages/doc"
+                onClick={closeMenu}
+                className="text-gray-600 hover:text-primary transition py-2 px-3 rounded-lg hover:bg-gray-50"
+              >
+                Documentation
+              </Link>
             </div>
           </div>
         )}
