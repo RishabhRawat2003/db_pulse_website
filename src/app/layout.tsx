@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Figtree, Fraunces, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/global/Header";
 import Footer from "@/components/global/Footer";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
+const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces" });
+const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
 
 export const metadata: Metadata = {
   title: "DbPulse – Database Query Monitoring & API Tracking",
@@ -21,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased scroll-smooth`}>
+      <body className={`${figtree.variable} ${fraunces.variable} ${jetbrains.variable} font-sans antialiased scroll-smooth`}>
         <Header />
         {children}
         <Footer />

@@ -4,49 +4,42 @@ import { Code2, Download, Key } from "lucide-react";
 
 function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-12 sm:py-16 md:py-20 bg-white">
+    <section id="how-it-works" className="py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-dark">
-            Get started in minutes
-          </h2>
-          <p className="text-gray-500 text-sm sm:text-base max-w-xl mx-auto">
-            Simple three-step flow from desktop app to production agent.
+        <div className="text-center mb-12">
+          <h2 className="font-display text-3xl text-dark mb-3">Get started in minutes</h2>
+          <p className="text-muted text-sm sm:text-base max-w-xl mx-auto">
+            Desktop app, a connection, then the agent inside your service.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             {
               step: "1",
-              title: "Install Desktop App",
-              icon: <Download className="w-5 h-5 sm:w-6 sm:h-6" />,
-              desc: "Download DbPulse for Windows or Mac, sign up, and add your database connection string (MongoDB ready)."
+              title: "Install the desktop app",
+              icon: <Download className="w-5 h-5" />,
+              desc: "Download DBPulse, sign in, and add the database you want to watch.",
             },
             {
               step: "2",
-              title: "Get API Key & Connection ID",
-              icon: <Key className="w-5 h-5 sm:w-6 sm:h-6" />,
-              desc: "After adding connection, you'll receive unique credentials to authenticate the agent."
+              title: "Copy the API key",
+              icon: <Key className="w-5 h-5" />,
+              desc: "Each connection has an API key and a connection ID for the agent.",
             },
             {
               step: "3",
-              title: "Integrate Agent in Backend",
-              icon: <Code2 className="w-5 h-5 sm:w-6 sm:h-6" />,
-              desc: "Install dbpulse-agent, initialize with API key, and add middleware — queries are tracked instantly."
+              title: "Add the agent",
+              icon: <Code2 className="w-5 h-5" />,
+              desc: "Initialize dbpulse-agent before the database client. Queries show up in the app.",
             },
           ].map((item) => (
-            <div
-              key={item.step}
-              className="relative p-5 sm:p-6 rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition"
-            >
-              <div className="absolute -top-4 left-6 bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+            <div key={item.step} className="rounded-2xl border border-line bg-card p-6">
+              <div className="mb-4 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-on-accent">
                 {item.step}
               </div>
-              <div className="mt-4 mb-3 text-primary">{item.icon}</div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-2 text-dark">
-                {item.title}
-              </h3>
-              <p className="text-gray-500 text-sm sm:text-base">{item.desc}</p>
+              <div className="mb-3 text-primary">{item.icon}</div>
+              <h3 className="text-lg font-semibold mb-2 text-dark">{item.title}</h3>
+              <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>

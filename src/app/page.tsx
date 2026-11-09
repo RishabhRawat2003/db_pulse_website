@@ -9,7 +9,7 @@ import DownloadSection from "@/components/homepageComponents/DownloadSection";
 export default function LandingPage() {
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-canvas">
       <main>
         {/* Hero Section */}
         <HeroSection />

@@ -1,27 +1,83 @@
 @import "tailwindcss";
 
-
 @theme {
-  --color-primary: #23AB73;
-  --color-dark: #0F172A;
+  --color-primary: #ff7a45;
+  --color-accent-soft: #ffb089;
+  --color-on-accent: #1a0d07;
+  --color-dark: #f4f1ea;
+  --color-soft: #c9c4bb;
+  --color-canvas: #0b0c0f;
+  --color-card: #12141a;
+  --color-field: #0c0e13;
+  --color-chip: #1c1f27;
+  --color-muted: #8d928c;
+  --color-line: rgba(255, 255, 255, 0.1);
 
-  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@theme inline {
+  --font-sans: var(--font-figtree), system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }
 
 @layer base {
+  html,
   body {
-    @apply bg-white text-dark antialiased;
+    background: #0b0c0f;
+    color: #f4f1ea;
+  }
+  body {
+    @apply bg-canvas text-dark antialiased;
+    font-family: var(--font-figtree), system-ui, sans-serif;
   }
   ::selection {
-    @apply bg-primary/20 text-primary;
+    background: rgba(255, 122, 69, 0.28);
+    color: #fff4ee;
+  }
+}
+
+@keyframes dbpulse-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.dbpulse-rise {
+  animation: dbpulse-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.dbpulse-caret {
+  animation: dbpulse-caret 1s steps(1) infinite;
+}
+
+@keyframes dbpulse-caret {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dbpulse-rise {
+    animation: none;
+  }
+  .dbpulse-caret {
+    animation: none;
   }
 }
 
 @layer components {
   .container-custom {
     @apply max-w-7xl mx-auto px-6 md:px-10;
-  }
-  .gradient-border {
-    background: linear-gradient(135deg, #23AB73 0%, #1a8c5c 100%);
   }
 }

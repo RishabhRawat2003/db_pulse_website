@@ -4,46 +4,33 @@ import { Database, Server } from "lucide-react";
 
 function SupportedDB() {
   return (
-    <section className="py-12 sm:py-16 bg-white border-y border-gray-100">
+    <section className="border-y border-line bg-field py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3 text-dark">
-          Works with your stack
-        </h2>
-        <p className="text-gray-500 text-sm sm:text-base mb-8 sm:mb-10">
-          Monitor databases from your Node.js backend — easy integration.
+        <h2 className="font-display text-3xl text-dark mb-2">Works with your stack</h2>
+        <p className="text-muted text-sm sm:text-base mb-10">
+          Agents for Node.js, Python, and Java.
         </p>
-        <div className="flex flex-wrap justify-center gap-8 sm:gap-10 md:gap-12 items-center">
-          {/* MongoDB – Active */}
-          <div className="flex flex-col items-center gap-2 min-w-25">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-green-50 rounded-2xl flex items-center justify-center">
-              <Database className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
+        <div className="flex flex-wrap justify-center gap-10 md:gap-16">
+          <div className="flex flex-col items-center gap-2">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/15">
+              <Database className="h-7 w-7 text-primary" />
             </div>
-            <span className="font-medium text-sm sm:text-base">MongoDB</span>
-            <span className="text-xs bg-green-100 text-primary px-2 py-0.5 rounded-full">
-              Active
-            </span>
+            <span className="font-medium">MongoDB</span>
+            <span className="rounded-full bg-primary/15 px-2 py-0.5 text-xs text-primary">Active</span>
           </div>
-
-          {/* PostgreSQL – Coming soon */}
-          <div className="flex flex-col items-center gap-2 opacity-50 min-w-25">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-100 rounded-2xl flex items-center justify-center">
-              <Server className="w-7 h-7 sm:w-8 sm:h-8 text-gray-400" />
+          <div className="flex flex-col items-center gap-2">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/15">
+              <Server className="h-7 w-7 text-primary" />
             </div>
-            <span className="font-medium text-sm sm:text-base">PostgreSQL</span>
-            <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">
-              Coming soon
-            </span>
+            <span className="font-medium">PostgreSQL</span>
+            <span className="rounded-full bg-primary/15 px-2 py-0.5 text-xs text-primary">Active</span>
           </div>
-
-          {/* MySQL – Coming soon */}
-          <div className="flex flex-col items-center gap-2 opacity-50 min-w-25">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-100 rounded-2xl flex items-center justify-center">
-              <Database className="w-7 h-7 sm:w-8 sm:h-8 text-gray-400" />
+          <div className="flex flex-col items-center gap-2 opacity-50">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5">
+              <Database className="h-7 w-7 text-muted" />
             </div>
-            <span className="font-medium text-sm sm:text-base">MySQL</span>
-            <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">
-              Coming soon
-            </span>
+            <span className="font-medium">MySQL</span>
+            <span className="rounded-full bg-white/5 px-2 py-0.5 text-xs text-muted">Coming soon</span>
           </div>
         </div>
       </div>
